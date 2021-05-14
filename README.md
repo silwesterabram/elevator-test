@@ -31,8 +31,8 @@ For each floor, display which elevator is going up/down
 
 ### Requirements
 
-You have **1 day** from the moment you receive the problem to ask any relevant question about the specifications.
-You have **3 days** to submit your code that implements the above mentioned functionalities.
+You have **4 day** from the moment you receive the problem to ask any relevant question about the specifications.
+You have **5 days** to submit your code that implements the above mentioned functionalities.
 The code should be added to a **public git repository**, we strongly recomment github for this.
 
- **We will take into consideration your coding style and your code organization and structure as well as the correctness of the provided solution.**
+ **We will take into consideration your thinking, logic, coding style and your code organization and structure as well as the correctness of the provided solution.**
