@@ -3,6 +3,7 @@ import { Elevator } from "./components/Elevator"
 import { Floor } from "./components/Floor"
 import "./styles/app.css"
 import { ValidValues } from "./types/validValues";
+import { Display as SevenSegmentDisplay } from "react-7-segment-display";
 
 function App() {
   const [elevatorAQueue, setElevatorAQueue] = useState<ValidValues[]>([]);
@@ -66,7 +67,16 @@ function App() {
   }, [elevatorBQueue]);
 
   return (
+    <div className="app-main-holder">
       <div className="main-holder">
+        <div className="elevator-a-interface-holder">
+          <SevenSegmentDisplay 
+            count={1} 
+            height={100} 
+            value={elevatorAPosition} 
+            color={"red"} skew={true} 
+          />
+        </div>
         <div className="left-side-holder">
           {Array.from({ length: 7 }, (_, index) => {
             const level = 6 - index as ValidValues;
@@ -91,7 +101,16 @@ function App() {
             <Elevator current_positon={elevatorBPosition} next={elevatorBQueue[0] || null} name='B' />
           </div>
         </div>
+        <div className="elevator-b-interface-holder">
+          <SevenSegmentDisplay 
+            count={1} 
+            height={100} 
+            value={elevatorBPosition} 
+            color={"red"} skew={true} 
+          />
+        </div>
       </div>
+    </div>
   )
 }
 

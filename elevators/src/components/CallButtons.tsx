@@ -3,6 +3,7 @@ import "../styles/navigationButton.css"
 import { navigationButtonDownStyles, navigationButtonUpStyles } from '../styles/navigationButton';
 import { IconButton } from '@mui/material';
 import { ValidValues } from '../types/validValues';
+import { useEffect } from 'react';
 
 export const CallButtons = (props: {
   elevatorAPosition: ValidValues,
@@ -26,6 +27,30 @@ export const CallButtons = (props: {
     props.onButtonPress(props.current_floor, "down");
   };
 
+useEffect(() => {
+  if (props.floorState === "calledUp" && props.elevatorAPosition === props.current_floor) {
+    props.setFloorState("free");
+  }
+}, [props.elevatorAPosition]);
+
+useEffect(() => {
+  if (props.floorState === "calledDown" && props.elevatorAPosition === props.current_floor) {
+    props.setFloorState("free");
+  }
+}, [props.elevatorAPosition]);
+
+useEffect(() => {
+  if (props.floorState === "calledUp" && props.elevatorBPosition === props.current_floor) {
+    props.setFloorState("free");
+  }
+}, [props.elevatorBPosition]);
+
+useEffect(() => {
+  if (props.floorState === "calledDown" && props.elevatorBPosition === props.current_floor) {
+    props.setFloorState("free");
+  }
+}, [props.elevatorBPosition]);
+
   return (
     <>
       <div className="call-button-holder">
@@ -40,7 +65,8 @@ export const CallButtons = (props: {
                 boxShadow: "0px 0px 10px 2px rgba(255, 255, 0, 0.8)",
                 backgroundColor: "black",
                 borderRadius: "3px"
-              }}/> :
+              }}/>
+              :
               <NavigationIcon style={{
                 ...navigationButtonUpStyles, 
                 backgroundColor: "#313131",
