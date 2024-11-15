@@ -5,6 +5,8 @@ import { IconButton } from '@mui/material';
 import { ValidValues } from '../types/validValues';
 
 export const CallButtons = (props: {
+  elevatorAPosition: ValidValues,
+  elevatorBPosition: ValidValues,
   up_arrow?: boolean,
   down_arrow?: boolean,
   current_floor: 0 | 1 | 2 | 3 | 4 | 5 | 6,
@@ -29,7 +31,9 @@ export const CallButtons = (props: {
       <div className="call-button-holder">
         {props.current_floor != 6 ? 
           <IconButton onClick={handleUpPress}>
-            {props.floorState === "calledUp" ? 
+            {props.floorState === "calledUp" && 
+              props.current_floor !== props.elevatorAPosition && 
+              props.current_floor !== props.elevatorBPosition ? 
               <NavigationIcon style={{
                 ...navigationButtonUpStyles, 
                 color: "yellow",
@@ -49,7 +53,9 @@ export const CallButtons = (props: {
         }
         {props.current_floor != 0 ? 
           <IconButton onClick={handleDownPress}>
-            {props.floorState === "calledDown" ?
+            {props.floorState === "calledDown" && 
+              props.current_floor !== props.elevatorAPosition && 
+              props.current_floor !== props.elevatorBPosition ?
               <NavigationIcon style={{
                 ...navigationButtonUpStyles, 
                 transform: "rotate(180deg)", 

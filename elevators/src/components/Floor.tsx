@@ -23,6 +23,8 @@ export const Floor = (props: {
                 floorState={floorState}
                 setFloorState={setFloorState} 
                 onButtonPress={props.onButtonPress}
+                elevatorAPosition={props.elevator_a_position}
+                elevatorBPosition={props.elevator_b_position}
             />
             <h1 className="floor-title">
                 F{props.level}
