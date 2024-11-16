@@ -1,13 +1,173 @@
-.elevator-holder {
-  padding-bottom: 0.25vh;
-  padding-top: 0.25vh;
+.elevator-holder-B {
   height: 12vh;
   width: 100%;
   background-color: #808080;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-bottom: 0.5vh solid #191919;
+  animation-fill-mode: forwards;
 }
+
+.elevator-holder-A {
+  height: 12vh;
+  margin-top: 75vh;
+  width: 100%;
+  background-color: #808080;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 0.5vh solid #191919;
+}
+
+@keyframes floor-6-to-5 {
+  0% {margin-top: 0vh;}
+  100% {margin-top: 12.5vh;}
+}
+
+@keyframes floor-5-to-4 {
+  0% {margin-top: 12.5vh;}
+  100% {margin-top: 25vh;}
+}
+
+@keyframes floor-4-to-3 {
+  0% {margin-top: 25vh;}
+  100% {margin-top: 37.5vh;}
+}
+
+@keyframes floor-3-to-2 {
+  0% {margin-top: 37.5vh;}
+  100% {margin-top: 50vh;}
+}
+
+@keyframes floor-2-to-1 {
+  0% {margin-top: 50vh;}
+  100% {margin-top: 62.5vh;}
+}
+
+@keyframes floor-1-to-0 {
+  0% {margin-top: 62.5vh;}
+  100% {margin-top: 75vh;}
+}
+
+@keyframes floor-5-to-6 {
+  0% {margin-top: 12.5vh;}
+  100% {margin-top: 0vh;}
+}
+
+@keyframes floor-4-to-5 {
+  0% {margin-top: 25vh;}
+  100% {margin-top: 12.5vh;}
+}
+
+@keyframes floor-3-to-4 {
+  0% {margin-top: 37.5vh;}
+  100% {margin-top: 25vh;}
+}
+
+@keyframes floor-2-to-3 {
+  0% {margin-top: 50vh;}
+  100% {margin-top: 37.5vh;}
+}
+
+@keyframes floor-1-to-2 {
+  0% {margin-top: 62.5vh;}
+  100% {margin-top: 50vh;}
+}
+
+@keyframes floor-0-to-1 {
+  0% {margin-top: 75vh;}
+  100% {margin-top: 62.5vh;}
+}
+
+/* add 12.5vh to top margin to move 1 floor viusally */
+
+.move-6-to-5 {
+  animation-name: floor-6-to-5;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
+.move-5-to-4 {
+  animation-name: floor-5-to-4;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
+.move-4-to-3 {
+  animation-name: floor-4-to-3;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
+.move-3-to-2 {
+  animation-name: floor-3-to-2;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
+.move-2-to-1 {
+  animation-name: floor-2-to-1;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
+.move-1-to-0 {
+  animation-name: floor-1-to-0;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
+/*  */
+
+.move-5-to-6 {
+  animation-name: floor-5-to-6;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
+.move-4-to-5 {
+  animation-name: floor-4-to-5;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
+.move-3-to-4 {
+  animation-name: floor-3-to-4;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
+.move-2-to-3 {
+  animation-name: floor-2-to-3;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
+.move-1-to-2 {
+  animation-name: floor-1-to-2;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
+.move-0-to-1 {
+  animation-name: floor-0-to-1;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
 
 h1 {
   font-size: 4rem;

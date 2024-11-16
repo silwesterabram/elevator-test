@@ -71,9 +71,6 @@
   width: 100%;
   margin-right: 0.25vh;
   display: flex;
-
-  /* temporal */
-  background-color: bisque;
 }
 
 .elevator-b-holder {
@@ -82,9 +79,6 @@
   width: 100%;
   margin-left: 0.25vh;
   display: flex;
-
-  /* temporal */
-  background-color: gainsboro;
 }
 
 h1 {
