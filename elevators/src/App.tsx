@@ -14,20 +14,67 @@ function App() {
   const [elevatorBDynamicClassName, setElevatorBDynamicClassName] = useState<string>(``);
   const [elevatorADynamicClassName, setElevatorADynamicClassName] = useState<string>(``);
 
+  const [elevatorAActiveButtons, setElevatorAActiveButtons] = useState<ValidValues[]>([]);
+  const [elevatorBActiveButtons, setElevatorBActiveButtons] = useState<ValidValues[]>([]);
+
+  const handleElevatorButtonPress = (target: ValidValues, elevator: "A" | "B") => {
+    const queue: ValidValues[] = [];
+    const elevatorQueue = elevator === "A" ? elevatorAQueue : elevatorBQueue;
+    const setElevatorQueue = elevator === "A" ? setElevatorAQueue : setElevatorBQueue;
+    const elevatorPosition = elevator === "A" ? elevatorAPosition : elevatorBPosition;
+
+    if (elevatorPosition === target && elevatorQueue.length === 0) {
+      return;
+    }
+
+    elevator === "A" ? 
+      setElevatorAActiveButtons([...elevatorAActiveButtons, target]) : 
+      setElevatorBActiveButtons([...elevatorBActiveButtons, target]);
+
+    const startingPosition = elevatorQueue.length > 0 ?
+      elevatorQueue[elevatorQueue.length - 1] :
+      elevator === "A" ? 
+        elevatorAPosition :
+        elevatorBPosition;
+    
+    if (startingPosition < target) {
+      for (let i = startingPosition + 1; i <= target; ++i) {
+        queue.push(i as ValidValues);
+      }
+    } else {
+      for (let i = startingPosition - 1; i >= target; --i) {
+        queue.push(i as ValidValues)
+      }
+    }
+
+    setElevatorQueue((prevQueue) => [...prevQueue, ...queue]);
+  }
+
   const handleFloorButtonPress = (floor: ValidValues, direction: "up" | "down") => {
     const distanceToA = Math.abs(floor - elevatorAPosition);
     const distanceToB = Math.abs(floor - elevatorBPosition);
+
+    const elevatorQueue = distanceToA < distanceToB || (distanceToA === distanceToB) ? elevatorAQueue : elevatorBQueue;
+    const elevatorPosition = distanceToA < distanceToB || (distanceToA === distanceToB) ? elevatorAPosition : elevatorBPosition;
+
+    if (floor === elevatorPosition && elevatorQueue.length === 0) {
+      return;
+    }
+
+    const startingPosition = elevatorQueue.length > 0 ?
+      elevatorQueue[elevatorQueue.length - 1] : 
+      distanceToA < distanceToB || (distanceToA === distanceToB) ?
+        elevatorAPosition :
+        elevatorBPosition;
 
     const updateQueue = (currentPosition: ValidValues, setQueue: React.Dispatch<React.SetStateAction<ValidValues[]>>) => {
       const queue: ValidValues[] = [];
       
       if (currentPosition < floor) {
-        // Moving up: add each floor between current position and target floor
         for (let i = currentPosition + 1; i <= floor; i++) {
           queue.push(i as ValidValues);
         }
       } else {
-        // Moving down: add each floor between current position and target floor
         for (let i = currentPosition - 1; i >= floor; i--) {
           queue.push(i as ValidValues);
         }
@@ -38,10 +85,10 @@ function App() {
       console.log(`Pushing floors to queue: ${queue.map(f => `${f}-${direction}`).join(", ")}`);
     };
 
-    if (distanceToA < distanceToB || (distanceToA === distanceToB && elevatorAPosition !== elevatorBPosition)) {
-      updateQueue(elevatorAPosition, setElevatorAQueue);
+    if (distanceToA < distanceToB || (distanceToA === distanceToB)) {
+      updateQueue(startingPosition, setElevatorAQueue);
     } else {
-      updateQueue(elevatorBPosition, setElevatorBQueue);
+      updateQueue(startingPosition, setElevatorBQueue);
     }
   };
 
@@ -78,7 +125,14 @@ function App() {
   return (
     <div className="app-main-holder">
       <div className="main-holder">
-        <ElevatorInterface elevatorPosition={elevatorAPosition} className={"elevator-a-interface-holder"} name={"A"} />
+        <ElevatorInterface 
+          elevatorPosition={elevatorAPosition} 
+          className={"elevator-a-interface-holder"} 
+          name={"A"} 
+          onElevatorButtonPress={handleElevatorButtonPress}
+          activeButtons={elevatorAActiveButtons}
+          setActiveButtons={setElevatorAActiveButtons}
+        />
         <div className="left-side-holder">
           {Array.from({ length: 7 }, (_, index) => {
             const level = 6 - index as ValidValues;
@@ -103,7 +157,14 @@ function App() {
             <Elevator current_positon={elevatorBPosition} next={elevatorBQueue[0] || null} name='B' visualClassName={elevatorBDynamicClassName} />
           </div>
         </div>
-        <ElevatorInterface elevatorPosition={elevatorBPosition} className={"elevator-b-interface-holder"} name={"B"} />
+        <ElevatorInterface 
+          elevatorPosition={elevatorBPosition} 
+          className={"elevator-b-interface-holder"} 
+          name={"B"} 
+          onElevatorButtonPress={handleElevatorButtonPress}
+          activeButtons={elevatorBActiveButtons}
+          setActiveButtons={setElevatorBActiveButtons}
+        />
       </div>
     </div>
   )
