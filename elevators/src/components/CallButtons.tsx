@@ -8,23 +8,19 @@ import { useEffect } from 'react';
 export const CallButtons = (props: {
   elevatorAPosition: ValidValues,
   elevatorBPosition: ValidValues,
-  up_arrow?: boolean,
-  down_arrow?: boolean,
-  current_floor: 0 | 1 | 2 | 3 | 4 | 5 | 6,
+  current_floor: ValidValues,
   floorState: "calledUp" | "calledDown" | "free",
   setFloorState: React.Dispatch<React.SetStateAction<"calledUp" | "calledDown" | "free">>,
-  onButtonPress: (floor: ValidValues, direction: "up" | "down") => void
+  onButtonPress: (floor: ValidValues) => void
 }) => {
-   // Function to handle up button press
    const handleUpPress = () => {
     props.setFloorState("calledUp");
-    props.onButtonPress(props.current_floor, "up");
+    props.onButtonPress(props.current_floor);
   };
 
-  // Function to handle down button press
   const handleDownPress = () => {
     props.setFloorState("calledDown");
-    props.onButtonPress(props.current_floor, "down");
+    props.onButtonPress(props.current_floor);
   };
 
 useEffect(() => {

@@ -5,12 +5,10 @@ import { ValidValues } from "../types/validValues"
 import { ElevatorIndicatingLights } from "./ElevatorIndicatingLights"
 
 export const Floor = (props: {
-    down_arrow?: boolean,
-    up_arrow?: boolean,
+    downArrow?: boolean,
+    upArrow?: boolean,
     level: ValidValues,
-    elevator_a_position: ValidValues,
-    elevator_b_position: ValidValues,
-    onButtonPress: (floor: ValidValues, direction: "up" | "down") => void
+    onButtonPress: (floor: ValidValues) => void
     elevatorAQueueIsEmpty: boolean,
     elevatorBQueueIsEmpty: boolean,
     elevatorAQueue: ValidValues[],
@@ -24,14 +22,12 @@ export const Floor = (props: {
     <>
         <div className="floor-background-holder">
             <CallButtons 
-                up_arrow={props.up_arrow} 
-                down_arrow={props.down_arrow} 
                 current_floor={props.level}
                 floorState={floorState}
                 setFloorState={setFloorState} 
                 onButtonPress={props.onButtonPress}
-                elevatorAPosition={props.elevator_a_position}
-                elevatorBPosition={props.elevator_b_position}
+                elevatorAPosition={props.elevatorAPosition}
+                elevatorBPosition={props.elevatorBPosition}
             />
             <ElevatorIndicatingLights 
                 aUp={(!props.elevatorAQueueIsEmpty && props.elevatorAQueue[0] > props.elevatorAPosition) ? "active" : "inactive"} 

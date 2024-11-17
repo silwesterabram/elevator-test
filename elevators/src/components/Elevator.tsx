@@ -1,8 +1,8 @@
 import "../styles/elevator.css"
+import { ValidValues } from "../types/validValues"
 
 export const Elevator = (props: {
-  current_positon: 0 | 1 | 2 | 3 | 4 | 5 | 6,
-  next: 0 | 1 | 2 | 3 | 4 | 5 | 6 | null,
+  current_positon: ValidValues,
   name: 'A' | 'B',
   visualClassName: string,
 }) => {

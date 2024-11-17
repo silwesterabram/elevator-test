@@ -1,11 +1,12 @@
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import "../styles/floor.css"
+import { IndicatingLightStates } from '../types/indicatingLightStates';
 
 export const ElevatorIndicatingLights = (props: {
-  aUp: "active" |  "inactive",
-  aDown: "active" |  "inactive",
-  bUp: "active" |  "inactive",
-  bDowm: "active" |  "inactive",
+  aUp: IndicatingLightStates,
+  aDown: IndicatingLightStates,
+  bUp: IndicatingLightStates,
+  bDowm: IndicatingLightStates,
 }) => {
   return (
     <div className="indicating-lights-holder">

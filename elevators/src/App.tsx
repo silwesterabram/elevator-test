@@ -8,12 +8,10 @@ import { ElevatorInterface } from "./components/ElevatorInterface";
 function App() {
   const [elevatorAQueue, setElevatorAQueue] = useState<ValidValues[]>([]);
   const [elevatorBQueue, setElevatorBQueue] = useState<ValidValues[]>([]);
-  const [elevatorAPosition, setElevatorAPosition] = useState<ValidValues>(0);
-  const [elevatorBPosition, setElevatorBPosition] = useState<ValidValues>(6);
-
+  const [elevatorAPosition, setElevatorAPosition] = useState<ValidValues>(0); // start elevator from bottom floor
+  const [elevatorBPosition, setElevatorBPosition] = useState<ValidValues>(6); // start elevator from top floor
   const [elevatorBDynamicClassName, setElevatorBDynamicClassName] = useState<string>(``);
   const [elevatorADynamicClassName, setElevatorADynamicClassName] = useState<string>(``);
-
   const [elevatorAActiveButtons, setElevatorAActiveButtons] = useState<ValidValues[]>([]);
   const [elevatorBActiveButtons, setElevatorBActiveButtons] = useState<ValidValues[]>([]);
 
@@ -50,12 +48,16 @@ function App() {
     setElevatorQueue((prevQueue) => [...prevQueue, ...queue]);
   }
 
-  const handleFloorButtonPress = (floor: ValidValues, direction: "up" | "down") => {
+  const handleFloorButtonPress = (floor: ValidValues) => {
     const distanceToA = Math.abs(floor - elevatorAPosition);
     const distanceToB = Math.abs(floor - elevatorBPosition);
 
     const elevatorQueue = distanceToA < distanceToB || (distanceToA === distanceToB) ? elevatorAQueue : elevatorBQueue;
-    const elevatorPosition = distanceToA < distanceToB || (distanceToA === distanceToB) ? elevatorAPosition : elevatorBPosition;
+    const elevatorPosition = 
+      distanceToA < distanceToB || 
+      (distanceToA === distanceToB) ? 
+        elevatorAPosition : 
+        elevatorBPosition;
 
     if (floor === elevatorPosition && elevatorQueue.length === 0) {
       return;
@@ -63,7 +65,7 @@ function App() {
 
     const startingPosition = elevatorQueue.length > 0 ?
       elevatorQueue[elevatorQueue.length - 1] : 
-      distanceToA < distanceToB || (distanceToA === distanceToB) ?
+      distanceToA < distanceToB || ((distanceToA === distanceToB) && (elevatorAPosition < elevatorBPosition)) ?
         elevatorAPosition :
         elevatorBPosition;
 
@@ -80,12 +82,12 @@ function App() {
         }
       }
   
-      // Update the selected elevator's queue
       setQueue((prevQueue) => [...prevQueue, ...queue]);
-      console.log(`Pushing floors to queue: ${queue.map(f => `${f}-${direction}`).join(", ")}`);
     };
 
-    if (distanceToA < distanceToB || (distanceToA === distanceToB)) {
+    if (
+      distanceToA < distanceToB || 
+      ((distanceToA === distanceToB) && elevatorAPosition < elevatorBPosition)) {
       updateQueue(startingPosition, setElevatorAQueue);
     } else {
       updateQueue(startingPosition, setElevatorBQueue);
@@ -140,10 +142,8 @@ function App() {
               <Floor
                 key={level}
                 level={level as ValidValues}
-                down_arrow={false}
-                up_arrow={false}
-                elevator_a_position={elevatorAPosition}
-                elevator_b_position={elevatorBPosition}
+                downArrow={false}
+                upArrow={false}
                 onButtonPress={handleFloorButtonPress}
                 elevatorAQueueIsEmpty={elevatorAQueue.length === 0}
                 elevatorBQueueIsEmpty={elevatorBQueue.length === 0}
@@ -157,10 +157,10 @@ function App() {
         </div>
         <div className="right-side-holder">
           <div className="elevator-a-holder">
-            <Elevator current_positon={elevatorAPosition} next={elevatorAQueue[0] || null} name='A' visualClassName={elevatorADynamicClassName} />
+            <Elevator current_positon={elevatorAPosition} name='A' visualClassName={elevatorADynamicClassName} />
           </div>
           <div className="elevator-b-holder">
-            <Elevator current_positon={elevatorBPosition} next={elevatorBQueue[0] || null} name='B' visualClassName={elevatorBDynamicClassName} />
+            <Elevator current_positon={elevatorBPosition} name='B' visualClassName={elevatorBDynamicClassName} />
           </div>
         </div>
         <ElevatorInterface 
