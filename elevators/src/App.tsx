@@ -138,14 +138,20 @@ function App() {
             const level = 6 - index as ValidValues;
             return (
               <Floor
-              key={level}
-              level={level as ValidValues}
-              down_arrow={false}
-              up_arrow={false}
-              elevator_a_position={elevatorAPosition}
-              elevator_b_position={elevatorBPosition}
-              onButtonPress={handleFloorButtonPress}
-            />
+                key={level}
+                level={level as ValidValues}
+                down_arrow={false}
+                up_arrow={false}
+                elevator_a_position={elevatorAPosition}
+                elevator_b_position={elevatorBPosition}
+                onButtonPress={handleFloorButtonPress}
+                elevatorAQueueIsEmpty={elevatorAQueue.length === 0}
+                elevatorBQueueIsEmpty={elevatorBQueue.length === 0}
+                elevatorAQueue={elevatorAQueue}
+                elevatorBQueue={elevatorBQueue} 
+                elevatorAPosition={elevatorAPosition} 
+                elevatorBPosition={elevatorBPosition} 
+              />
             )
           })}
         </div>

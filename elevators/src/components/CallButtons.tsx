@@ -64,13 +64,13 @@ useEffect(() => {
                 color: "yellow",
                 boxShadow: "0px 0px 10px 2px rgba(255, 255, 0, 0.8)",
                 backgroundColor: "black",
-                borderRadius: "3px"
+                borderRadius: "3px",
               }}/>
               :
               <NavigationIcon style={{
                 ...navigationButtonUpStyles, 
                 backgroundColor: "#313131",
-                borderRadius: "3px"
+                borderRadius: "3px",
               }} />
             }
           </IconButton>

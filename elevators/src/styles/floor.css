@@ -14,3 +14,43 @@
   font-size: 4rem;
   margin-right: 7%;
 }
+
+.indicating-lights-holder {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: min-content;
+  height: 100%;
+  font-size: 4rem;
+}
+
+.indicating-a-holder {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  flex-flow: column;
+}
+
+.indicating-b-holder {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  flex-flow: column;
+}
+
+.A-up-active {
+  color: yellow;
+}
+
+.A-down-active {
+  color: yellow;
+}
+
+.B-up-active {
+  color: yellow;
+}
+
+.B-down-active {
+  color: yellow;
+}
